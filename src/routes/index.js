@@ -1,5 +1,4 @@
+import PlayerRoutes from 'modules/players/routes'
 import TournamentRoutes from 'modules/tournaments/routes'
 
-export default [
-  ...TournamentRoutes
-]
+export default [...PlayerRoutes, ...TournamentRoutes]

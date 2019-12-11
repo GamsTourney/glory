@@ -1,5 +1,13 @@
 import React from 'react'
-import { AppBar, Container, IconButton, Toolbar, ThemeProvider, Typography } from '@material-ui/core'
+import PropTypes from 'prop-types'
+import {
+  AppBar,
+  Container,
+  IconButton,
+  Toolbar,
+  ThemeProvider,
+  Typography
+} from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
 import { createMuiTheme } from '@material-ui/core/styles'
 import teal from '@material-ui/core/colors/teal'
@@ -10,19 +18,19 @@ import appRoutes from 'routes'
 import { getHistory } from 'routes/history'
 import './styles.scss'
 
+const stylesheets = [
+  'https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap',
+  'https://fonts.googleapis.com/icon?family=Material+Icons'
+]
+
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Nunito',
+    fontFamily: 'Nunito'
   },
   palette: {
     primary: teal
   }
 })
-
-const stylesheets = [
-  'https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap',
-  'https://fonts.googleapis.com/icon?family=Material+Icons'
-]
 
 const Layout = ({ routes }) => {
   return (
@@ -32,9 +40,7 @@ const Layout = ({ routes }) => {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <Menu />
           </IconButton>
-          <Typography variant="h6" >
-            Gams
-          </Typography>
+          <Typography variant="h6">Gams</Typography>
         </Toolbar>
       </AppBar>
       <Container id="main-container">
@@ -51,6 +57,18 @@ const Layout = ({ routes }) => {
   )
 }
 
+Layout.propTypes = {
+  routes: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string,
+      content: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      exact: PropTypes.bool,
+      open: PropTypes.bool
+    })
+  ).isRequired
+}
+
+// eslint-disable-next-line
 const App = ({ store }) => {
   return (
     <Provider store={store}>

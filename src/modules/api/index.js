@@ -3,6 +3,8 @@ import axios from 'axios'
 import get from 'lodash/get'
 
 import { getHistory } from 'routes/history'
+import { API_AUTHORIZED, API_UNAUTHORIZED } from 'modules/players/dux'
+import { getCurrentPlayerId } from 'modules/players/helpers'
 
 const env = runtimeEnv()
 
@@ -30,6 +32,15 @@ function processResponse(dispatch, state, data) {
     return true
   }
 
+  if (!get(state, 'login.currentUserId')) {
+    return Promise.resolve(
+      dispatch({
+        type: API_AUTHORIZED,
+        currentUserId: getCurrentPlayerId(data.jwt)
+      })
+    ).then(() => data)
+  }
+
   return Promise.resolve(data)
 }
 
@@ -38,6 +49,9 @@ function request(collection, url, options = {}) {
   const req = {
     method,
     url,
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    },
     ...options
   }
 
@@ -52,12 +66,14 @@ function request(collection, url, options = {}) {
       })
       .then(data => dispatch(apiRecieve(collection, method, data)))
       .then(() => resp)
+      .catch(error => {
+        const errorResponse = error.response
+        if (errorResponse.status === 401) {
+          return dispatch({ type: API_UNAUTHORIZED })
+        }
+        return errorResponse
+      })
   }
 }
 
-export {
-  API_URL,
-  API_FETCH,
-  API_RECEIVE,
-  request
-}
+export { API_URL, API_FETCH, API_RECEIVE, request }

@@ -2,7 +2,7 @@ import TournamentManage from './pages/manage'
 
 export default [
   {
-    path: '/tournaments/manage',
+    path: '/tournaments',
     content: TournamentManage,
     exact: true
   }

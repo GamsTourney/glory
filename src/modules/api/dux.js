@@ -16,7 +16,7 @@ function extractData(data) {
   return keyBy(objects, 'id')
 }
 
-function entities(state = initialState, action) {
+export default function entities(state = initialState, action) {
   let newState
   const entity = get(action, 'entity')
   const method = get(action, 'method')
@@ -39,5 +39,3 @@ function entities(state = initialState, action) {
       return state
   }
 }
-
-export { entities }
