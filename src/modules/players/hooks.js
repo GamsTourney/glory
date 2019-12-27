@@ -7,7 +7,6 @@ import { fetchPlayer } from './actions'
 const useCurrentPlayer = () => {
   const dispatch = useDispatch()
   const currentPlayerId = useSelector(selectCurrentPlayerId)
-  console.log(currentPlayerId)
   const currentPlayer = useSelector(selectCurrentPlayer)
 
   useEffect(() => {

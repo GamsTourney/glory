@@ -1,21 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  AppBar,
-  Container,
-  IconButton,
-  Toolbar,
-  ThemeProvider,
-  Typography
-} from '@material-ui/core'
-import { Menu } from '@material-ui/icons'
+import { Container, ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import teal from '@material-ui/core/colors/teal'
 import { Provider } from 'react-redux'
-import { Router, Route } from 'react-router'
+import { Router } from 'react-router'
 
 import appRoutes from 'routes'
 import { getHistory } from 'routes/history'
+import AppRoute from './app_route'
+import Bar from './bar'
 import './styles.scss'
 
 const stylesheets = [
@@ -35,21 +29,15 @@ const theme = createMuiTheme({
 const Layout = ({ routes }) => {
   return (
     <>
-      <AppBar position="static" color="primary">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <Menu />
-          </IconButton>
-          <Typography variant="h6">Gams</Typography>
-        </Toolbar>
-      </AppBar>
+      <Bar />
       <Container id="main-container">
         {routes.map(r => (
-          <Route
+          <AppRoute
             key={r.path}
             path={r.path}
             component={r.content}
             exact={r.exact}
+            open={r.open}
           />
         ))}
       </Container>
