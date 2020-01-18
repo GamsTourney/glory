@@ -4,7 +4,7 @@ const API_AUTHORIZED = 'API_AUTHORIZED'
 export default function auth(state = {}, action) {
   switch (action.type) {
     case API_AUTHORIZED:
-      return { currentUserId: action.currentUserId }
+      return { currentPlayerId: action.currentPlayerId }
     case API_UNAUTHORIZED:
       return { unauthorized: true }
     default:

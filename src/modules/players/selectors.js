@@ -8,7 +8,7 @@ const selectIsAuthenticated = createSelector(
 )
 
 const selectPlayers = state => get(state, 'entities.players')
-const selectCurrentPlayerId = state => get(state, 'auth.selectAuth')
+const selectCurrentPlayerId = state => get(state, 'auth.currentPlayerId')
 const selectCurrentPlayer = createSelector(
   selectPlayers,
   selectCurrentPlayerId,

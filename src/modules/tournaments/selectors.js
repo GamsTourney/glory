@@ -11,4 +11,15 @@ const selectActiveTournamentId = createSelector(selectCurrentPlayer, player =>
   get(player, 'activeTournamentId')
 )
 
-export { selectTournaments, selectTournamentsList, selectActiveTournamentId }
+const selectActiveTournament = createSelector(
+  selectTournaments,
+  selectActiveTournamentId,
+  (tournaments, tournamentId) => get(tournaments, tournamentId)
+)
+
+export {
+  selectTournaments,
+  selectTournamentsList,
+  selectActiveTournamentId,
+  selectActiveTournament
+}

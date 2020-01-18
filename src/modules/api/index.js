@@ -32,11 +32,11 @@ function processResponse(dispatch, state, data) {
     return true
   }
 
-  if (!get(state, 'login.currentUserId')) {
+  if (!get(state, 'login.currentPlayerId')) {
     return Promise.resolve(
       dispatch({
         type: API_AUTHORIZED,
-        currentUserId: getCurrentPlayerId(data.jwt)
+        currentPlayerId: getCurrentPlayerId(data.jwt)
       })
     ).then(() => data)
   }

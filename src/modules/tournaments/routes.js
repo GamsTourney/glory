@@ -8,7 +8,7 @@ export default [
     exact: true
   },
   {
-    path: '/tournaments/:id',
+    path: '/',
     content: TournamentDashboard,
     exact: true
   }

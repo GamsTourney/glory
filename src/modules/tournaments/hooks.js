@@ -1,7 +1,22 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTournaments } from './actions'
-import { selectActiveTournamentId, selectTournamentsList } from './selectors'
+import {
+  selectActiveTournamentId,
+  selectActiveTournament,
+  selectTournamentsList
+} from './selectors'
+
+const useActiveTournament = () => {
+  const dispatch = useDispatch()
+  const tournament = useSelector(selectActiveTournament)
+
+  useEffect(() => {
+    dispatch(fetchTournaments())
+  }, [dispatch])
+
+  return tournament
+}
 
 const useTournamentCollection = (action, selector) => {
   const dispatch = useDispatch()
@@ -28,4 +43,4 @@ const useTournaments = () => {
   return tournaments
 }
 
-export { useTournamentCollection, useTournaments }
+export { useActiveTournament, useTournamentCollection, useTournaments }
