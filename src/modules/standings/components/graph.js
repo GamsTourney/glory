@@ -39,7 +39,7 @@ const StandingsGraph = () => {
   const standings = useTournamentStandings()
 
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={375}>
       <BarChart data={standings} layout="vertical">
         <YAxis type="category" dataKey="name" />
         <XAxis type="number" />

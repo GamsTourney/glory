@@ -1,19 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
-
-import { useTournamentMatches } from 'modules/matches/hooks'
 import MatchCard from './card'
 
 const useStyles = makeStyles(() => ({
   upcoming: {
-    height: '350px',
+    height: '375px',
     overflow: 'scroll'
   }
 }))
 
-const UpcomingMatches = () => {
+const MatchList = ({ matches }) => {
   const classes = useStyles()
-  const matches = useTournamentMatches()
   return (
     <div className={classes.upcoming}>
       {matches.map(m => (
@@ -23,4 +21,9 @@ const UpcomingMatches = () => {
   )
 }
 
-export default UpcomingMatches
+MatchList.propTypes = {
+  matches: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number }))
+    .isRequired
+}
+
+export default MatchList
