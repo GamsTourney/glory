@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { selectCurrentPlayerId, selectCurrentPlayer } from './selectors'
-import { fetchPlayer } from './actions'
+import { useTournamentCollection } from 'modules/tournaments/hooks'
+import {
+  selectCurrentPlayerId,
+  selectCurrentPlayer,
+  selectTournamentPlayers
+} from './selectors'
+import { fetchPlayer, fetchPlayers } from './actions'
 
 const useCurrentPlayer = () => {
   const dispatch = useDispatch()
@@ -18,4 +23,7 @@ const useCurrentPlayer = () => {
   return currentPlayer
 }
 
-export { useCurrentPlayer }
+const useTournamentPlayers = () =>
+  useTournamentCollection(fetchPlayers, selectTournamentPlayers)
+
+export { useCurrentPlayer, useTournamentPlayers }

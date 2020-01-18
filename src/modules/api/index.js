@@ -68,7 +68,7 @@ function request(collection, url, options = {}) {
       .then(() => resp)
       .catch(error => {
         const errorResponse = error.response
-        if (errorResponse.status === 401) {
+        if (errorResponse && errorResponse.status === 401) {
           return dispatch({ type: API_UNAUTHORIZED })
         }
         return errorResponse

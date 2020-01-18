@@ -1,4 +1,5 @@
 import { request } from 'modules/api'
+import { fetchTournamentCollection } from 'modules/api/actions'
 
 function requestToken(auth) {
   return request('players', '/auth/login', {
@@ -11,4 +12,7 @@ function fetchPlayer(playerId) {
   return request('players', `/players/${playerId}`)
 }
 
-export { requestToken, fetchPlayer }
+const fetchPlayers = tournamentId =>
+  fetchTournamentCollection('players', tournamentId)
+
+export { requestToken, fetchPlayer, fetchPlayers }
