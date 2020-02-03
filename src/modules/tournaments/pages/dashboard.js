@@ -2,9 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import LinearProgress from '@material-ui/core/LinearProgress'
 import isEmpty from 'lodash/isEmpty'
-import filter from 'lodash/filter'
 
 import { useTournamentGames } from 'modules/games/hooks'
 import { useTournamentPlayers } from 'modules/players/hooks'
@@ -31,9 +29,6 @@ const TournamentDashboard = () => {
   useTournamentPlayers()
   const matches = useTournamentMatches()
   const games = useTournamentGames()
-  const completedMatches = filter(matches, m => m.completed).length
-  const totalMatches = matches.length
-  const completed = Math.floor((completedMatches / totalMatches) * 100)
 
   if (isEmpty(matches) || isEmpty(games)) {
     return null

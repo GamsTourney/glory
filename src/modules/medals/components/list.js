@@ -16,11 +16,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MEDALS = [
-  { name: 'Rob', award: 'Most Kills in Unreal Tournament' },
-  { name: 'Rob', award: 'Top Play' },
-  { name: 'Rob', award: 'Scootinest' },
-  { name: 'Rob', award: 'Tootinest' },
-  { name: 'Nick', award: 'Gams 2020 Champion' }
+  { id: 0, name: 'Rob', award: 'Most Kills in Unreal Tournament' },
+  { id: 1, name: 'Rob', award: 'Top Play' },
+  { id: 2, name: 'Rob', award: 'Scootinest' },
+  { id: 3, name: 'Rob', award: 'Tootinest' },
+  { id: 4, name: 'Nick', award: 'Gams 2020 Champion' }
 ]
 
 const MedalList = () => {
@@ -28,7 +28,7 @@ const MedalList = () => {
   return (
     <div className={classes.upcoming}>
       {MEDALS.map(m => (
-        <Paper className={classes.paper} variant="outlined">
+        <Paper key={m.id} className={classes.paper} variant="outlined">
           <Grid
             container
             direction="row"
