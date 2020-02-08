@@ -4,13 +4,12 @@ import get from 'lodash/get'
 import filter from 'lodash/filter'
 
 const selectAuth = state => state.auth || {}
+const selectPlayers = state => get(state, 'entities.players')
+const selectCurrentPlayerId = state => get(state, 'auth.currentPlayerId')
 const selectIsAuthenticated = createSelector(
   selectAuth,
   auth => !auth.unauthorized
 )
-
-const selectPlayers = state => get(state, 'entities.players')
-const selectCurrentPlayerId = state => get(state, 'auth.currentPlayerId')
 
 const selectCurrentPlayer = createSelector(
   selectPlayers,

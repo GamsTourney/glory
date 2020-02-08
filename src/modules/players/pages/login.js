@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -18,8 +19,14 @@ const paperStyle = {
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [redirect, setRedirect] = useState()
   const dispatch = useDispatch()
-  const authenticate = auth => dispatch(requestToken(auth))
+  const authenticate = auth =>
+    dispatch(requestToken(auth)).then(() => setRedirect('/'))
+
+  if (redirect) {
+    return <Redirect to="/" />
+  }
 
   return (
     <Container maxWidth="sm">

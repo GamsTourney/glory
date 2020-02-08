@@ -34,7 +34,7 @@ AppRoute.propTypes = {
 }
 
 AppRoute.defaultProps = {
-  open: true,
+  open: false,
   location: '/'
 }
 

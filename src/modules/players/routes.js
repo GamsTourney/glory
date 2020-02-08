@@ -4,6 +4,7 @@ export default [
   {
     path: '/login',
     content: Login,
-    exact: true
+    exact: true,
+    open: true
   }
 ]

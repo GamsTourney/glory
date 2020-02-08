@@ -6,7 +6,7 @@ export default function auth(state = {}, action) {
     case API_AUTHORIZED:
       return { currentPlayerId: action.currentPlayerId }
     case API_UNAUTHORIZED:
-      return { unauthorized: true }
+      return { currentPlayerId: null, unauthorized: true }
     default:
       return state
   }

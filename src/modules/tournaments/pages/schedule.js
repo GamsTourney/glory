@@ -34,8 +34,6 @@ const TournamentSchedule = () => {
     return null
   }
 
-  console.log(schedule)
-
   return (
     <Paper className={classes.paper}>
       <div className={classes.paperHeading}>Tournament Schedule</div>
