@@ -21,6 +21,11 @@ const useStyles = makeStyles(() => ({
 const PlayerAvatar = ({ playerId, isWinner, size }) => {
   const classes = useStyles()
   const player = useSelector(state => selectPlayer(state, { playerId }))
+
+  if (!playerId) {
+    return null
+  }
+
   const key = size ? `steam.avatar${size}` : 'steam.avatar'
   const url = get(player, key)
   const cn = isWinner ? classes.winner : classes.avatar
@@ -28,12 +33,13 @@ const PlayerAvatar = ({ playerId, isWinner, size }) => {
 }
 
 PlayerAvatar.propTypes = {
-  playerId: PropTypes.number.isRequired,
+  playerId: PropTypes.number,
   isWinner: PropTypes.bool,
   size: PropTypes.oneOf([null, 'medium', 'full'])
 }
 
 PlayerAvatar.defaultProps = {
+  playerId: undefined,
   isWinner: false,
   size: null
 }

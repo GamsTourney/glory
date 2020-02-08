@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(2)
   },
   menuItemIcon: {
-    marginRight: '8px'
+    marginRight: '12px'
   }
 }))
 

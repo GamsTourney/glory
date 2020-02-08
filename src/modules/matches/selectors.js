@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import get from 'lodash/get'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
+import orderBy from 'lodash/orderBy'
 
 import { createPropGetter } from 'selectors/helpers'
 import { selectActiveTournamentId } from 'modules/tournaments/selectors'
@@ -10,6 +11,27 @@ import { selectTournamentGames } from 'modules/games/selectors'
 import { getGameName } from 'modules/games/helpers'
 
 const selectMatches = state => get(state, 'entities.matches')
+
+const selectMatch = createSelector(
+  selectMatches,
+  createPropGetter('matchId'),
+  (matches, matchId) => get(matches, matchId)
+)
+
+const selectMatchPlayers = createSelector(
+  selectMatch,
+  selectTournamentPlayers,
+  (match, players) => {
+    const { matchCompetitors } = match
+    const ordered = orderBy(matchCompetitors, ['points'], ['desc'])
+    const matchPlayers = ordered.map(mc => {
+      const { playerId } = mc
+      const player = find(players, { id: playerId }) || {}
+      return { ...player, matchCompetitorId: mc.id }
+    })
+    return matchPlayers
+  }
+)
 
 const selectTournamentMatches = createSelector(
   selectMatches,
@@ -66,4 +88,10 @@ const selectTimelineData = createSelector(
   }
 )
 
-export { selectMatches, selectTournamentMatches, selectTimelineData }
+export {
+  selectMatches,
+  selectMatch,
+  selectMatchPlayers,
+  selectTournamentMatches,
+  selectTimelineData
+}

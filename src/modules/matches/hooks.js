@@ -1,8 +1,23 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTournamentCollection } from 'modules/tournaments/hooks'
-import { fetchMatches } from './actions'
-import { selectTournamentMatches } from './selectors'
+import { fetchMatch, fetchMatches } from './actions'
+import { selectMatch, selectTournamentMatches } from './selectors'
 
 const useTournamentMatches = () =>
   useTournamentCollection(fetchMatches, selectTournamentMatches)
 
-export { useTournamentMatches }
+const useMatch = matchId => {
+  const dispatch = useDispatch()
+  const match = useSelector(state => selectMatch(state, { matchId }))
+
+  useEffect(() => {
+    if (matchId) {
+      dispatch(fetchMatch(matchId))
+    }
+  }, [dispatch, matchId])
+
+  return match
+}
+
+export { useMatch, useTournamentMatches }

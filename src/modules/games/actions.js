@@ -1,6 +1,8 @@
-import { fetchTournamentCollection } from 'modules/api/actions'
+import { fetchTournamentCollection, fetchItem } from 'modules/api/actions'
+
+const fetchGame = gameId => fetchItem('games', gameId)
 
 const fetchGames = tournamentId =>
   fetchTournamentCollection('games', tournamentId)
 
-export { fetchGames }
+export { fetchGame, fetchGames }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import {
   Cell,
   ResponsiveContainer,
@@ -12,7 +11,6 @@ import groupBy from 'lodash/groupBy'
 import sumBy from 'lodash/sumBy'
 import get from 'lodash/get'
 
-import { selectGame } from 'modules/games/selectors'
 import { COLOR_WHEEL } from 'constants/colors'
 
 function getInitials(name) {
@@ -28,8 +26,8 @@ const GameBreakdown = ({ matches, games }) => {
   const availablePoints = []
   const claimedPoints = []
   Object.entries(matchesByGame).forEach(([gameId, matches]) => {
-    const game = useSelector(state => selectGame(state, { gameId }))
-    const name = get(game, 'name')
+    const game = find(games, { id: gameId }) || {}
+    const name = get(game, 'name', '')
     const initials = getInitials(name)
     const maxPoints = get(game, 'maxScore')
     availablePoints.push({ name, value: maxPoints * matches.length, initials })
