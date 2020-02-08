@@ -10,11 +10,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import get from 'lodash/get'
 
 import { selectIsAuthenticated } from 'modules/players/selectors'
 import { logout } from 'modules/players/actions'
 import { useCurrentPlayer } from 'modules/players/hooks'
-import { useTournaments } from 'modules/tournaments/hooks'
+import { useTournaments, useActiveTournament } from 'modules/tournaments/hooks'
 import AppDrawer from './drawer'
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const Bar = () => {
   useTournaments()
+  const tournament = useActiveTournament()
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const dispatch = useDispatch()
   const classes = useStyles()
@@ -71,7 +73,7 @@ const Bar = () => {
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="h6">
-          Gams
+          {get(tournament, 'name')}
         </Typography>
         {isAuthenticated && currentPlayer && (
           <div className={classes.user}>
