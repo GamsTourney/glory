@@ -8,6 +8,18 @@ function fetchMatch(matchId) {
 const fetchMatches = tournamentId =>
   fetchTournamentCollection('matches', tournamentId)
 
+const uploadPicture = (matchId, picture) => {
+  const formData = new FormData()
+  formData.append('result_picture', picture)
+  return request('matches', `/matches/${matchId}/attach_picture`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    data: formData
+  })
+}
+
 const updateMatch = (matchId, data) => {
   return request('matches', `/matches/${matchId}`, {
     method: 'PATCH',
@@ -15,4 +27,4 @@ const updateMatch = (matchId, data) => {
   })
 }
 
-export { fetchMatch, fetchMatches, updateMatch }
+export { fetchMatch, fetchMatches, uploadPicture, updateMatch }
