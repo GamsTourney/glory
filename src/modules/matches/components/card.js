@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
@@ -14,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     fontColor: 'gray',
     marginBottom: '8px'
   },
+  link: {
+    textDecoration: 'none'
+  },
   paper: {
     padding: theme.spacing(1),
     marginBottom: theme.spacing(1)
@@ -22,27 +26,30 @@ const useStyles = makeStyles(theme => ({
 
 const MatchCard = ({ match }) => {
   const classes = useStyles()
-  const { gameId } = match
+  const { id, gameId } = match
   const game = useSelector(state => selectGame(state, { gameId }))
   const { name: gameName } = game
   const mcs = get(match, 'matchCompetitors', [])
 
   return (
-    <Paper className={classes.paper} variant="outlined">
-      <div className={classes.game}>{gameName}</div>
-      {mcs.map(mc => (
-        <PlayerAvatar
-          key={mc.playerId}
-          playerId={mc.playerId}
-          isWinner={mc.position === 0}
-        />
-      ))}
-    </Paper>
+    <Link to={`/matches/${id}`} className={classes.link}>
+      <Paper className={classes.paper} variant="outlined">
+        <div className={classes.game}>{gameName}</div>
+        {mcs.map(mc => (
+          <PlayerAvatar
+            key={mc.playerId}
+            playerId={mc.playerId}
+            isWinner={mc.position === 0}
+          />
+        ))}
+      </Paper>
+    </Link>
   )
 }
 
 MatchCard.propTypes = {
   match: PropTypes.shape({
+    id: PropTypes.number,
     gameId: PropTypes.number
   }).isRequired
 }
