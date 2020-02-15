@@ -11,12 +11,14 @@ import { selectPlayer } from 'modules/players/selectors'
 import { useTournamentPlayers } from 'modules/players/hooks'
 import { useGame } from 'modules/games/hooks'
 import { updateMatch } from 'modules/matches/actions'
+import { COLOR_WHEEL } from 'constants/colors'
 import PlayerAvatar from 'modules/players/components/avatar'
 
 const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1, 2),
-    marginBottom: '12px'
+    marginBottom: '12px',
+    borderWidth: '1.25px'
   },
   cardContent: {
     display: 'flex',
@@ -41,9 +43,10 @@ const useStyles = makeStyles(theme => ({
 const RankScoreCard = ({ matchCompetitor, dragProps }) => {
   const classes = useStyles()
 
-  const { playerId, points } = matchCompetitor
+  const { playerId, points, team } = matchCompetitor
   const player = useSelector(state => selectPlayer(state, { playerId }))
   const { name } = player
+  const borderColor = get(COLOR_WHEEL, team)
 
   return (
     playerId && (
@@ -51,6 +54,7 @@ const RankScoreCard = ({ matchCompetitor, dragProps }) => {
         key={playerId}
         className={classes.paper}
         variant="outlined"
+        style={{ borderColor }}
         {...dragProps}
       >
         <div className={classes.cardContent}>

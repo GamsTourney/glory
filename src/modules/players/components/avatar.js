@@ -11,23 +11,26 @@ const avatar = {
   marginRight: '8px'
 }
 
-const useStyles = makeStyles(() => ({
-  avatar,
-  winner: {
-    ...avatar
+const useStyles = makeStyles(theme => {
+  return {
+    avatar,
+    winner: {
+      border: `3px solid ${theme.palette.success.main}`,
+      ...avatar
+    }
   }
-}))
+})
 
 const PlayerAvatar = ({ playerId, isWinner, size }) => {
   const classes = useStyles()
   const player = useSelector(state => selectPlayer(state, { playerId }))
+  const key = size ? `steam.avatar${size}` : 'steam.avatar'
+  const url = get(player, key)
 
-  if (!playerId) {
+  if (!playerId || !url) {
     return null
   }
 
-  const key = size ? `steam.avatar${size}` : 'steam.avatar'
-  const url = get(player, key)
   const cn = isWinner ? classes.winner : classes.avatar
   return <img alt="player" className={cn} src={url} />
 }

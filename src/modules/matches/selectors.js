@@ -15,7 +15,7 @@ const selectMatches = state => get(state, 'entities.matches')
 const selectMatch = createSelector(
   selectMatches,
   createPropGetter('matchId'),
-  (matches, matchId) => get(matches, matchId)
+  (matches, matchId) => get(matches, matchId, {})
 )
 
 const selectMatchPlayers = createSelector(

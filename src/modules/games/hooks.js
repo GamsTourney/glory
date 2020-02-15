@@ -9,7 +9,7 @@ const useTournamentGames = () =>
 
 const useGame = gameId => {
   const dispatch = useDispatch()
-  const match = useSelector(state => selectGame(state, { gameId }))
+  const game = useSelector(state => selectGame(state, { gameId }))
 
   useEffect(() => {
     if (gameId) {
@@ -17,7 +17,7 @@ const useGame = gameId => {
     }
   }, [dispatch, gameId])
 
-  return match
+  return game
 }
 
 export { useGame, useTournamentGames }
