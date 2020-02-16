@@ -75,7 +75,9 @@ const Bar = () => {
           <MenuIcon />
         </IconButton>
         <Typography className={classes.title} variant="h6">
-          <Hidden xsDown>{get(tournament, 'name')}</Hidden>
+          <Hidden xsDown>
+            <div>{get(tournament, 'name')}</div>
+          </Hidden>
         </Typography>
 
         {isAuthenticated && currentPlayer && (
