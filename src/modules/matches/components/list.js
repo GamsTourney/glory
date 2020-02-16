@@ -10,13 +10,17 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
+const ZeroState = () => <div style={{ textAlign: 'center' }}>All done!</div>
+
 const MatchList = ({ matches }) => {
   const classes = useStyles()
   return (
     <div className={classes.upcoming}>
-      {matches.map(m => (
-        <MatchCard match={m} key={m.id} />
-      ))}
+      {matches.length > 0 ? (
+        matches.map(m => <MatchCard match={m} key={m.id} />)
+      ) : (
+        <ZeroState />
+      )}
     </div>
   )
 }

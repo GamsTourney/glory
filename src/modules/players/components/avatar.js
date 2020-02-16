@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
+import { Badge } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import get from 'lodash/get'
 
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => {
   }
 })
 
-const PlayerAvatar = ({ playerId, isWinner, size }) => {
+const PlayerAvatar = ({ playerId, isWinner, points, size }) => {
   const classes = useStyles()
   const player = useSelector(state => selectPlayer(state, { playerId }))
   const key = size ? `steam.avatar${size}` : 'steam.avatar'
@@ -32,18 +33,32 @@ const PlayerAvatar = ({ playerId, isWinner, size }) => {
   }
 
   const cn = isWinner ? classes.winner : classes.avatar
-  return <img alt="player" className={cn} src={url} />
+  return (
+    <Badge
+      color="primary"
+      overlap="circle"
+      badgeContent={points}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+    >
+      <img alt="player" className={cn} src={url} />
+    </Badge>
+  )
 }
 
 PlayerAvatar.propTypes = {
   playerId: PropTypes.number,
   isWinner: PropTypes.bool,
+  points: PropTypes.number,
   size: PropTypes.oneOf([null, 'medium', 'full'])
 }
 
 PlayerAvatar.defaultProps = {
   playerId: undefined,
   isWinner: false,
+  points: undefined,
   size: null
 }
 

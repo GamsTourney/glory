@@ -26,6 +26,7 @@ const MatchPlayers = ({ matchCompetitors }) => {
           <div className={classes.centered} key={mc.playerId}>
             <PlayerAvatar
               playerId={mc.playerId}
+              points={mc.points}
               isWinner={mc.position === 0}
               size="medium"
             />

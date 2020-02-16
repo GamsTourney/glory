@@ -43,6 +43,10 @@ const selectTournamentMatches = createSelector(
   }
 )
 
+const selectUpcomingMatches = createSelector(selectTournamentMatches, matches =>
+  filter(matches, { completed: false })
+)
+
 const selectTournamentMatchesByPlayer = createSelector(
   selectTournamentMatches,
   matches => {
@@ -93,5 +97,6 @@ export {
   selectMatch,
   selectMatchPlayers,
   selectTournamentMatches,
+  selectUpcomingMatches,
   selectTimelineData
 }

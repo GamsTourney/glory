@@ -33,6 +33,15 @@ const useStyles = makeStyles(theme => {
       display: 'flex',
       justifyContent: 'flex-end'
     },
+    details: {
+      padding: theme.spacing(1),
+      textAlign: 'left',
+      whiteSpace: 'pre-wrap'
+    },
+    gamePicture: {
+      marginTop: theme.spacing(1),
+      padding: theme.spacing(1)
+    },
     link: {
       textDecoration: 'none'
     },
@@ -42,10 +51,6 @@ const useStyles = makeStyles(theme => {
       fontSize: '1.25em',
       fontWeight: 'bold',
       marginBottom: '12px'
-    },
-    resultPicture: {
-      ...paper,
-      minHeight: '300px'
     },
     title: {
       fontSize: '1.5em'
@@ -62,8 +67,8 @@ const MatchDetail = ({ match: location }) => {
   const gameMatch = useMatch(matchId) || {}
   const { gameId, matchCompetitors } = gameMatch
   const game = useGame(gameId)
-  const { name: gameName } = game
-  const imgUrl = get(gameMatch, 'resultPicture')
+  const { details, imgUrl, name: gameName } = game
+  const resultImg = get(gameMatch, 'resultPicture')
 
   return (
     <>
@@ -92,26 +97,31 @@ const MatchDetail = ({ match: location }) => {
       </Grid>
       <Grid container direction="row" spacing={2}>
         <Grid item xs={12} md={7}>
+          <div className={classes.gamePicture}>
+            {imgUrl && <img alt="gamePicture" src={imgUrl} width="100%" />}
+          </div>
           <Paper className={classes.paper}>
             <div className={classes.paperHeading}>Competitors</div>
             <MatchPlayers matchCompetitors={matchCompetitors} />
           </Paper>
-          <Paper className={classes.paper}>
-            <div className={classes.paperHeading}>Match Details</div>
-            <div>TODO</div>
-          </Paper>
         </Grid>
         <Grid item xs={12} md={5}>
-          <Paper className={classes.resultPicture}>
-            <div className={classes.paperHeading}>Result Picture</div>
-            {imgUrl && (
+          {details && (
+            <Paper className={classes.paper}>
+              <div className={classes.paperHeading}>Scoring</div>
+              <div className={classes.details}>{details}</div>
+            </Paper>
+          )}
+          {resultImg && (
+            <Paper className={classes.paper}>
+              <div className={classes.paperHeading}>Result Picture</div>
               <img
                 alt="attachment"
-                src={getAttachmentUrl(imgUrl)}
+                src={getAttachmentUrl(resultImg)}
                 width="100%"
               />
-            )}
-          </Paper>
+            </Paper>
+          )}
         </Grid>
       </Grid>
     </>

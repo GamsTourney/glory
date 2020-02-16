@@ -39,6 +39,7 @@ const MatchCard = ({ match }) => {
           <PlayerAvatar
             key={mc.playerId}
             playerId={mc.playerId}
+            points={mc.points}
             isWinner={mc.position === 0}
           />
         ))}

@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
-import {
-  Menu as MenuIcon,
-  ExitToApp as Logout,
-  Person
-} from '@material-ui/icons'
+import { Menu as MenuIcon, ExitToApp as Logout } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Menu from '@material-ui/core/Menu'
@@ -95,10 +91,6 @@ const Bar = () => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
-                <Person className={classes.menuItemIcon} />
-                <span>Profile</span>
-              </MenuItem>
               <MenuItem onClick={handleLogout}>
                 <Logout className={classes.menuItemIcon} />
                 <span>Logout</span>
