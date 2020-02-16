@@ -43,6 +43,19 @@ const selectTournamentMatches = createSelector(
   }
 )
 
+const selectPlayerMatches = createSelector(
+  selectMatches,
+  createPropGetter('playerId'),
+  (matches, playerId) => {
+    return filter(matches, m => {
+      const { matchCompetitors } = m
+      return matchCompetitors.some(
+        mc => Number(mc.playerId) === Number(playerId)
+      )
+    })
+  }
+)
+
 const selectUpcomingMatches = createSelector(selectTournamentMatches, matches =>
   filter(matches, { completed: false })
 )
@@ -96,6 +109,7 @@ export {
   selectMatches,
   selectMatch,
   selectMatchPlayers,
+  selectPlayerMatches,
   selectTournamentMatches,
   selectUpcomingMatches,
   selectTimelineData

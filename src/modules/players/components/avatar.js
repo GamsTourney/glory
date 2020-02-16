@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import { Badge } from '@material-ui/core'
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => {
   }
 })
 
-const PlayerAvatar = ({ playerId, isWinner, points, size }) => {
+const PlayerAvatar = ({ playerId, isWinner, points, size, isLink }) => {
   const classes = useStyles()
   const player = useSelector(state => selectPlayer(state, { playerId }))
   const key = size ? `steam.avatar${size}` : 'steam.avatar'
@@ -33,7 +34,7 @@ const PlayerAvatar = ({ playerId, isWinner, points, size }) => {
   }
 
   const cn = isWinner ? classes.winner : classes.avatar
-  return (
+  let content = (
     <Badge
       color="primary"
       overlap="circle"
@@ -46,20 +47,28 @@ const PlayerAvatar = ({ playerId, isWinner, points, size }) => {
       <img alt="player" className={cn} src={url} />
     </Badge>
   )
+
+  if (isLink) {
+    content = <Link to={`/players/${playerId}`}>{content}</Link>
+  }
+
+  return content
 }
 
 PlayerAvatar.propTypes = {
   playerId: PropTypes.number,
   isWinner: PropTypes.bool,
   points: PropTypes.number,
-  size: PropTypes.oneOf([null, 'medium', 'full'])
+  size: PropTypes.oneOf([null, 'medium', 'full']),
+  isLink: PropTypes.bool
 }
 
 PlayerAvatar.defaultProps = {
   playerId: undefined,
   isWinner: false,
   points: undefined,
-  size: null
+  size: null,
+  isLink: false
 }
 
 export default PlayerAvatar

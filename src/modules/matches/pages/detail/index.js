@@ -100,9 +100,11 @@ const MatchDetail = ({ match: location }) => {
       </Grid>
       <Grid container direction="row" spacing={2}>
         <Grid item xs={12} md={7}>
-          <div className={classes.gamePicture}>
-            {imgUrl && <img alt="gamePicture" src={imgUrl} width="100%" />}
-          </div>
+          <Link to={`/games/${gameId}`} className={classes.link}>
+            <div className={classes.gamePicture}>
+              {imgUrl && <img alt="gamePicture" src={imgUrl} width="100%" />}
+            </div>
+          </Link>
           <Paper className={classes.paper}>
             <div className={classes.paperHeading}>Competitors</div>
             <MatchPlayers matchCompetitors={matchCompetitors} />

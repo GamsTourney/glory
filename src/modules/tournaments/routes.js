@@ -14,7 +14,7 @@ export default [
     exact: true
   },
   {
-    path: '/',
+    path: '/overview',
     content: TournamentDashboard,
     exact: true
   }

@@ -73,14 +73,13 @@ const AppDrawer = ({ open, handleClose }) => {
           onKeyDown={handleClose}
         >
           <List>
-            <ListItem key="Tournament">
-              <ListItemIcon>
-                <Controller />
-              </ListItemIcon>
-              <ListItemText primary={get(tournament, 'name')} />
-            </ListItem>
+            <DrawerLink
+              link="/"
+              name={get(tournament, 'name', '')}
+              Icon={Controller}
+            />
             <Divider className={classes.divider} />
-            <DrawerLink link="/" name="Overview" Icon={Dashboard} />
+            <DrawerLink link="/overview" name="Overview" Icon={Dashboard} />
             <DrawerLink link="/schedule" name="Schedule" Icon={Event} />
             <DrawerLink link="/games" name="Games" Icon={Games} />
             <DrawerLink link="/players" name="Players" Icon={People} />

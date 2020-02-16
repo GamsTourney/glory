@@ -5,6 +5,10 @@ function fetchMatch(matchId) {
   return request('matches', `/matches/${matchId}`)
 }
 
+function fetchPlayerMatches(playerId) {
+  return request('matches', `/players/${playerId}/matches`)
+}
+
 const fetchMatches = tournamentId =>
   fetchTournamentCollection('matches', tournamentId)
 
@@ -27,4 +31,10 @@ const updateMatch = (matchId, data) => {
   })
 }
 
-export { fetchMatch, fetchMatches, uploadPicture, updateMatch }
+export {
+  fetchMatch,
+  fetchPlayerMatches,
+  fetchMatches,
+  uploadPicture,
+  updateMatch
+}

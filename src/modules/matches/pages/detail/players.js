@@ -29,6 +29,7 @@ const MatchPlayers = ({ matchCompetitors }) => {
               points={mc.points}
               isWinner={mc.position === 0}
               size="medium"
+              isLink
             />
             {teamKeys.length === 1 && idx < team.length - 1 && (
               <div

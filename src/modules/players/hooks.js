@@ -5,6 +5,7 @@ import { useTournamentCollection } from 'modules/tournaments/hooks'
 import {
   selectCurrentPlayerId,
   selectCurrentPlayer,
+  selectPlayer,
   selectTournamentPlayers
 } from './selectors'
 import { fetchPlayer, fetchPlayers } from './actions'
@@ -23,7 +24,20 @@ const useCurrentPlayer = () => {
   return currentPlayer
 }
 
+const usePlayer = playerId => {
+  const dispatch = useDispatch()
+  const player = useSelector(selectPlayer, { playerId })
+
+  useEffect(() => {
+    if (playerId) {
+      dispatch(fetchPlayer(playerId))
+    }
+  }, [dispatch, playerId])
+
+  return player
+}
+
 const useTournamentPlayers = () =>
   useTournamentCollection(fetchPlayers, selectTournamentPlayers)
 
-export { useCurrentPlayer, useTournamentPlayers }
+export { useCurrentPlayer, usePlayer, useTournamentPlayers }

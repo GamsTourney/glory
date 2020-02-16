@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import get from 'lodash/get'
 
+import { getGameName } from 'modules/games/helpers'
 import { selectGame } from 'modules/games/selectors'
 import PlayerAvatar from 'modules/players/components/avatar'
 
@@ -28,8 +29,8 @@ const MatchCard = ({ match }) => {
   const classes = useStyles()
   const { id, gameId } = match
   const game = useSelector(state => selectGame(state, { gameId }))
-  const { name: gameName } = game
   const mcs = get(match, 'matchCompetitors', [])
+  const gameName = getGameName(match, game)
 
   return (
     <Link to={`/matches/${id}`} className={classes.link}>
