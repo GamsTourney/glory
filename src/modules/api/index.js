@@ -76,4 +76,4 @@ function request(collection, url, options = {}) {
   }
 }
 
-export { API_URL, API_FETCH, API_RECEIVE, request }
+export { API_URL, API_FETCH, API_RECEIVE, apiRecieve, request }

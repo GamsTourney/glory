@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import { ActionCableConsumer } from 'react-actioncable-provider'
 import isEmpty from 'lodash/isEmpty'
 import orderBy from 'lodash/orderBy'
+import { apiRecieve } from 'modules/api'
 
 import { useTournamentGames } from 'modules/games/hooks'
 import { useTournamentPlayers } from 'modules/players/hooks'
@@ -40,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 const TournamentDashboard = () => {
   const classes = useStyles()
+  const dispatch = useDispatch()
   useTournamentPlayers()
   const allMatches = useTournamentMatches()
   const games = useTournamentGames()
@@ -48,6 +51,11 @@ const TournamentDashboard = () => {
 
   if (isEmpty(matches) || isEmpty(games)) {
     return null
+  }
+
+  const handleRecieved = match => {
+    const json = JSON.parse(match)
+    dispatch(apiRecieve('matches', 'get', json))
   }
 
   return (
@@ -86,6 +94,10 @@ const TournamentDashboard = () => {
           </div>
         </Paper>
       </Grid>
+      <ActionCableConsumer
+        channel="MatchesChannel"
+        onReceived={handleRecieved}
+      />
     </Grid>
   )
 }

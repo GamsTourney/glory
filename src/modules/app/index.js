@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { Container, ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { green, teal } from '@material-ui/core/colors'
+import runtimeEnv from '@mars/heroku-js-runtime-env'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
+import { ActionCableProvider } from 'react-actioncable-provider'
 
 import appRoutes from 'routes'
 import { getHistory } from 'routes/history'
@@ -26,6 +28,10 @@ const theme = createMuiTheme({
     success: green
   }
 })
+
+const env = runtimeEnv()
+const API_URL = env.REACT_APP_API_URL
+const cableUrl = `${API_URL.replace(/https?/, 'ws')}/cable`
 
 const Layout = ({ routes }) => {
   return (
@@ -61,14 +67,16 @@ Layout.propTypes = {
 const App = ({ store }) => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Router history={getHistory()}>
-          {stylesheets.map(s => (
-            <link key={s} rel="stylesheet" href={s} />
-          ))}
-          <Layout routes={appRoutes} />
-        </Router>
-      </ThemeProvider>
+      <ActionCableProvider url={cableUrl}>
+        <ThemeProvider theme={theme}>
+          <Router history={getHistory()}>
+            {stylesheets.map(s => (
+              <link key={s} rel="stylesheet" href={s} />
+            ))}
+            <Layout routes={appRoutes} />
+          </Router>
+        </ThemeProvider>
+      </ActionCableProvider>
     </Provider>
   )
 }

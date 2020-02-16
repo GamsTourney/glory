@@ -10,14 +10,16 @@ import {
   LabelList,
   Rectangle
 } from 'recharts'
-import { useTournamentStandings } from 'modules/standings/hooks'
-import { selectStandingAvatar } from 'modules/standings/selectors'
+import {
+  selectTournamentStandings,
+  selectStandingAvatar
+} from 'modules/standings/selectors'
 import { COLOR_WHEEL } from 'constants/colors'
 
 const Label = props => {
   // eslint-disable-next-line
-  const { id, x, y, width, height, value, index } = props
-  const avatar = useSelector(state => selectStandingAvatar(state, { id }))
+  const { id: playerId, x, y, width, height, value, index } = props
+  const avatar = useSelector(state => selectStandingAvatar(state, { playerId }))
   const size = 25
   const xPos = x + width + 10
   const yPos = y + 2
@@ -36,7 +38,7 @@ const RainbowBar = props => {
 }
 
 const StandingsGraph = () => {
-  const standings = useTournamentStandings()
+  const standings = useSelector(selectTournamentStandings)
 
   return (
     <ResponsiveContainer width="100%" height={375}>

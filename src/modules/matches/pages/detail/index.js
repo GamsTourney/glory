@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Button, Grid, Paper } from '@material-ui/core'
+import { Button, Grid, Hidden, Paper } from '@material-ui/core'
 import { Assignment } from '@material-ui/icons'
 import get from 'lodash/get'
 
@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => {
     },
     buttonToolbar: {
       display: 'flex',
-      justifyContent: 'flex-end'
+      justifyContent: 'flex-end',
+      marginLeft: 'auto'
     },
     details: {
       padding: theme.spacing(1),
@@ -78,7 +79,9 @@ const MatchDetail = ({ match: location }) => {
         justify="space-between"
         alignItems="center"
       >
-        <div className={classes.title}>{gameName}</div>
+        <Hidden xsDown>
+          <div className={classes.title}>{gameName}</div>
+        </Hidden>
         {admin && (
           <div className={classes.buttonToolbar}>
             <Link to={`/matches/${matchId}/score`} className={classes.link}>
