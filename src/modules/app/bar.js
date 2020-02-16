@@ -74,11 +74,10 @@ const Bar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Hidden xsDown>
-          <Typography className={classes.title} variant="h6">
-            {get(tournament, 'name')}
-          </Typography>
-        </Hidden>
+        <Typography className={classes.title} variant="h6">
+          <Hidden xsDown>{get(tournament, 'name')}</Hidden>
+        </Typography>
+
         {isAuthenticated && currentPlayer && (
           <div className={classes.user}>
             <Typography variant="h6">{currentPlayer.name}</Typography>
