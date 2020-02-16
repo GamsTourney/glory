@@ -61,7 +61,6 @@ const PlayerDetail = ({ match }) => {
     selectPlayerMatches(state, { playerId })
   )
   const upcoming = filter(playerMatches, { completed: false, tournamentId })
-  const completed = filter(playerMatches, { completed: true, tournamentId })
   const victories = getVictories(playerId, playerMatches)
   const points = getPoints(playerId, playerMatches)
 
@@ -80,10 +79,6 @@ const PlayerDetail = ({ match }) => {
         <Paper className={classes.paper}>
           <div className={classes.paperHeading}>Upcoming Matches</div>
           <MatchList matches={upcoming} />
-        </Paper>
-        <Paper className={classes.paper}>
-          <div className={classes.paperHeading}>Completed Matches</div>
-          <MatchList matches={completed} />
         </Paper>
       </Grid>
       <Grid item xs={12} md={8}>
