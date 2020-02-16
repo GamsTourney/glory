@@ -18,10 +18,10 @@ const PointsOverTime = ({ playerId, matches }) => {
   return (
     <ResponsiveContainer height={250} width="100%">
       <LineChart data={data}>
-        <XAxis dataKey="time" />
+        <XAxis dataKey="label" />
         <YAxis />
         <Tooltip />
-        <Line type="monotone" dataKey="points" stroke={teal['500']} />
+        <Line dot type="monotone" dataKey="points" stroke={teal['500']} />
       </LineChart>
     </ResponsiveContainer>
   )

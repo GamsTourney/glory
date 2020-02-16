@@ -17,6 +17,11 @@ const selectCurrentPlayer = createSelector(
   (players, playerId) => get(players, playerId, {})
 )
 
+const selectIsAdmin = createSelector(
+  selectCurrentPlayer,
+  player => player.admin
+)
+
 const selectPlayer = createSelector(
   selectPlayers,
   createPropGetter('playerId'),
@@ -36,6 +41,7 @@ const selectTournamentPlayers = createSelector(
 
 export {
   selectIsAuthenticated,
+  selectIsAdmin,
   selectPlayers,
   selectCurrentPlayerId,
   selectCurrentPlayer,

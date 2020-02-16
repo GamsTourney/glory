@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import get from 'lodash/get'
 import filter from 'lodash/filter'
 import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
 import orderBy from 'lodash/orderBy'
 
 import { createPropGetter } from 'selectors/helpers'
@@ -105,6 +106,40 @@ const selectTimelineData = createSelector(
   }
 )
 
+const selectPreviousMatch = createSelector(
+  selectTournamentMatches,
+  createPropGetter('matchId'),
+  (matches, matchId) => {
+    const id = Number(matchId)
+    const match = find(matches, { id }) || {}
+    const { gameId, groupId } = match
+    const groupMatches = filter(matches, {
+      gameId: Number(gameId),
+      groupId: groupId !== null ? Number(groupId) : null
+    })
+    const ordered = orderBy(groupMatches, 'endTime')
+    const index = findIndex(ordered, { id })
+    return index > 0 ? ordered[index - 1] : null
+  }
+)
+
+const selectNextMatch = createSelector(
+  selectTournamentMatches,
+  createPropGetter('matchId'),
+  (matches, matchId) => {
+    const id = Number(matchId)
+    const match = find(matches, { id }) || {}
+    const { gameId, groupId } = match
+    const groupMatches = filter(matches, {
+      gameId: Number(gameId),
+      groupId: groupId !== null ? Number(groupId) : null
+    })
+    const ordered = orderBy(groupMatches, 'endTime')
+    const index = findIndex(ordered, { id })
+    return index < ordered.length - 1 ? ordered[index + 1] : null
+  }
+)
+
 export {
   selectMatches,
   selectMatch,
@@ -112,5 +147,7 @@ export {
   selectPlayerMatches,
   selectTournamentMatches,
   selectUpcomingMatches,
-  selectTimelineData
+  selectTimelineData,
+  selectPreviousMatch,
+  selectNextMatch
 }

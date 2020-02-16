@@ -10,6 +10,7 @@ export default [
   {
     path: '/matches/:matchId/score',
     content: Scores,
-    exact: true
+    exact: true,
+    admin: true
   }
 ]

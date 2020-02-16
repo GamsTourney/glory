@@ -3,11 +3,10 @@ import { createPropGetter } from 'selectors/helpers'
 import get from 'lodash/get'
 import find from 'lodash/find'
 
-import { selectTournamentMatches } from 'modules/matches/selectors'
 import { selectTournamentPlayers } from 'modules/players/selectors'
 
 const selectTournamentStandings = createSelector(
-  selectTournamentMatches,
+  createPropGetter('matches'),
   selectTournamentPlayers,
   (matches, players) => {
     const standings = []
@@ -39,12 +38,4 @@ const selectTournamentStandings = createSelector(
   }
 )
 
-const selectStandingAvatar = createSelector(
-  selectTournamentStandings,
-  createPropGetter('playerId'),
-  (standings, playerId) => {
-    return get(find(standings, { playerId: Number(playerId) }), 'avatar')
-  }
-)
-
-export { selectTournamentStandings, selectStandingAvatar }
+export { selectTournamentStandings }

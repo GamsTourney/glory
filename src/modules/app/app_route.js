@@ -3,16 +3,19 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
 
-import { selectIsAuthenticated } from 'modules/players/selectors'
+import { selectIsAuthenticated, selectIsAdmin } from 'modules/players/selectors'
 
-const AppRoute = ({ component: Component, open, location, ...rest }) => {
+const AppRoute = ({ component: Component, admin, open, location, ...rest }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
+  const isAdmin = useSelector(selectIsAdmin)
+  const checkAdmin = true
+  // const checkAdmin = admin ? isAdmin : true
 
   return (
     <Route
       {...rest}
       render={props =>
-        open || isAuthenticated ? (
+        (open || isAuthenticated) && checkAdmin ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -28,12 +31,14 @@ const AppRoute = ({ component: Component, open, location, ...rest }) => {
 }
 
 AppRoute.propTypes = {
+  admin: PropTypes.bool,
   open: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
   location: PropTypes.string
 }
 
 AppRoute.defaultProps = {
+  admin: false,
   open: false,
   location: '/'
 }

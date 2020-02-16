@@ -28,11 +28,12 @@ const getPointsOverTime = (playerId, matches) => {
   let points = 0
   matches.forEach(m => {
     const { endTime, matchCompetitors } = m
-    const mc = find(matchCompetitors, { playerId })
+    const mc = find(matchCompetitors, { playerId }) || {}
     if (mc.points) {
-      const time = dayjs(endTime).format('hh:mm')
+      const time = dayjs(endTime).valueOf()
+      const label = dayjs(endTime).format('hh:mm')
       points += mc.points
-      data.push({ points, time })
+      data.push({ points, label, time, [playerId]: points })
     }
   })
   return data

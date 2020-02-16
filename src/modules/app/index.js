@@ -45,6 +45,7 @@ const Layout = ({ routes }) => {
             component={r.content}
             exact={r.exact}
             open={r.open}
+            admin={r.admin}
           />
         ))}
       </Container>

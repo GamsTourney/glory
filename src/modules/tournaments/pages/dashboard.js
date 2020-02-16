@@ -14,7 +14,7 @@ import { useTournamentPlayers } from 'modules/players/hooks'
 import { useTournamentMatches } from 'modules/matches/hooks'
 import { selectUpcomingMatches } from 'modules/matches/selectors'
 import { getAttachmentUrl } from 'utils/attachments'
-import TournamentStandings from 'modules/standings/components/graph'
+import TournamentStandings from 'modules/standings/components/bar_graph'
 import MatchList from 'modules/matches/components/list'
 
 const useStyles = makeStyles(theme => ({
@@ -63,7 +63,7 @@ const TournamentDashboard = () => {
       <Grid item xs={12} md={8}>
         <Paper className={classes.paper}>
           <div className={classes.paperHeading}>Standings</div>
-          <TournamentStandings />
+          <TournamentStandings matches={allMatches} />
         </Paper>
       </Grid>
       <Grid item xs={12} md={4}>

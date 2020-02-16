@@ -81,7 +81,7 @@ const MatchManualScore = ({ match }) => {
   useTournamentPlayers()
   const { matchCompetitors } = match
   const ordered = orderBy(matchCompetitors, ['points', 'id'], ['desc', 'desc'])
-  return ordered.map(mc => <ManualScoreCard matchCompetitor={mc} />)
+  return ordered.map(mc => <ManualScoreCard key={mc.id} matchCompetitor={mc} />)
 }
 
 export default MatchManualScore
