@@ -8,8 +8,7 @@ import { selectIsAuthenticated, selectIsAdmin } from 'modules/players/selectors'
 const AppRoute = ({ component: Component, admin, open, location, ...rest }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated)
   const isAdmin = useSelector(selectIsAdmin)
-  const checkAdmin = true
-  // const checkAdmin = admin ? isAdmin : true
+  const checkAdmin = admin ? isAdmin : true
 
   return (
     <Route
