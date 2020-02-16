@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '12px',
     display: 'flex',
     alignItems: 'center',
-    borderWidth: '1.25px'
+    borderWidth: '1.5px'
   },
   player: {
     marginLeft: '12px',

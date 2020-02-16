@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1, 2),
     marginBottom: '12px',
-    borderWidth: '1.25px'
+    borderWidth: '1.5px'
   },
   cardContent: {
     display: 'flex',

@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core'
+import {
+  AppBar,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Typography
+} from '@material-ui/core'
 import { Menu as MenuIcon, ExitToApp as Logout } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import AccountCircle from '@material-ui/icons/AccountCircle'
@@ -68,9 +74,11 @@ const Bar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={classes.title} variant="h6">
-          {get(tournament, 'name')}
-        </Typography>
+        <Hidden xsDown>
+          <Typography className={classes.title} variant="h6">
+            {get(tournament, 'name')}
+          </Typography>
+        </Hidden>
         {isAuthenticated && currentPlayer && (
           <div className={classes.user}>
             <Typography variant="h6">{currentPlayer.name}</Typography>
