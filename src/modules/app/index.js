@@ -31,7 +31,8 @@ const theme = createMuiTheme({
 
 const env = runtimeEnv()
 const API_URL = env.REACT_APP_API_URL
-const cableUrl = `${API_URL.replace(/https?/, 'ws')}/cable`
+const socketProto = API_URL.includes('https') ? 'wss' : 'ws'
+const cableUrl = `${API_URL.replace(/https?/, socketProto)}/cable`
 
 const Layout = ({ routes }) => {
   return (
