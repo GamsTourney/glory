@@ -11,6 +11,7 @@ import { getGameName } from 'modules/games/helpers'
 import { useGame } from 'modules/games/hooks'
 import { useTournamentMatches, useMatch } from 'modules/matches/hooks'
 import { selectPreviousMatch, selectNextMatch } from 'modules/matches/selectors'
+import { selectIsAdmin } from 'modules/players/selectors'
 import MatchRankScore from '../components/score/rank'
 import MatchManualScore from '../components/score/manual'
 import { SCORE_TYPES } from '../constants'
@@ -29,6 +30,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const MatchScore = ({ match: location }) => {
+  const isAdmin = useSelector(selectIsAdmin)
   useTournamentMatches()
   const classes = useStyles()
   const matchId = get(location, 'params.matchId')
@@ -42,6 +44,10 @@ const MatchScore = ({ match: location }) => {
   const nextMatch = useSelector(state => selectNextMatch(state, { matchId }))
 
   if (isEmpty(match)) {
+    return null
+  }
+
+  if (!isAdmin) {
     return null
   }
 

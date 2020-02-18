@@ -132,7 +132,7 @@ const selectNextMatch = createSelector(
     const { gameId, groupId } = match
     const groupMatches = filter(matches, {
       gameId: Number(gameId),
-      groupId: groupId !== null ? Number(groupId) : null
+      groupId: groupId !== null ? groupId : null
     })
     const ordered = orderBy(groupMatches, 'endTime')
     const index = findIndex(ordered, { id })
