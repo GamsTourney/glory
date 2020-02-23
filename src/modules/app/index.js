@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Container, ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
-import { green, teal } from '@material-ui/core/colors'
+import { green, indigo } from '@material-ui/core/colors'
 import runtimeEnv from '@mars/heroku-js-runtime-env'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
     fontFamily: 'Nunito'
   },
   palette: {
-    primary: teal,
+    primary: indigo,
     success: green
   }
 })

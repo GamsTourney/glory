@@ -1,4 +1,5 @@
 import TournamentDashboard from 'modules/tournaments/pages/dashboard'
+import AuthRedirect from 'modules/api/auth'
 import GameRoutes from 'modules/games/routes'
 import JudgesRoutes from 'modules/judges/routes'
 import MatchRoutes from 'modules/matches/routes'
@@ -10,6 +11,11 @@ export default [
   {
     path: '/',
     content: TournamentDashboard,
+    exact: true
+  },
+  {
+    path: '/auth/:token',
+    content: AuthRedirect,
     exact: true
   },
   ...GameRoutes,
