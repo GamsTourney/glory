@@ -7,7 +7,7 @@ import {
   PolarAngleAxis,
   Tooltip
 } from 'recharts'
-import { teal } from '@material-ui/core/colors'
+import { indigo } from '@material-ui/core/colors'
 
 import { getPointsByGenre } from 'modules/matches/helpers'
 
@@ -27,8 +27,8 @@ const GenreBreakdown = ({ playerId, matches, games }) => {
         <Radar
           name="score"
           dataKey="points"
-          stroke={teal['500']}
-          fill={teal['500']}
+          stroke={indigo['500']}
+          fill={indigo['500']}
           fillOpacity={0.6}
         />
         <Tooltip />

@@ -7,7 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from 'recharts'
-import { teal } from '@material-ui/core/colors'
+import { indigo } from '@material-ui/core/colors'
 
 import { getPointsOverTime } from 'modules/matches/helpers'
 
@@ -21,7 +21,7 @@ const PointsOverTime = ({ playerId, matches }) => {
         <XAxis dataKey="label" />
         <YAxis />
         <Tooltip />
-        <Line dot type="monotone" dataKey="points" stroke={teal['500']} />
+        <Line dot type="monotone" dataKey="points" stroke={indigo['500']} />
       </LineChart>
     </ResponsiveContainer>
   )
