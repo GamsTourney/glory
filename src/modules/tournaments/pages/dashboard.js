@@ -72,28 +72,6 @@ const TournamentDashboard = () => {
           <MatchList matches={matches} />
         </Paper>
       </Grid>
-      <Grid item xs={12}>
-        <Paper className={classes.paper}>
-          <div className={classes.paperHeading}>Results</div>
-          <div className={classes.resultSection}>
-            {orderedMatches.map(m => {
-              const { resultPicture } = m
-              if (!resultPicture) {
-                return null
-              }
-              return (
-                <Link key={m.id} to={`/matches/${m.id}`}>
-                  <img
-                    alt={m.id}
-                    className={classes.resultPicture}
-                    src={getAttachmentUrl(resultPicture)}
-                  />
-                </Link>
-              )
-            })}
-          </div>
-        </Paper>
-      </Grid>
       <ActionCableConsumer
         channel="MatchesChannel"
         onReceived={handleRecieved}
