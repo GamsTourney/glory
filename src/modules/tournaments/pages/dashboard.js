@@ -6,14 +6,12 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 import isEmpty from 'lodash/isEmpty'
-import orderBy from 'lodash/orderBy'
 import { apiRecieve } from 'modules/api'
 
 import { useTournamentGames } from 'modules/games/hooks'
 import { useTournamentPlayers } from 'modules/players/hooks'
 import { useTournamentMatches } from 'modules/matches/hooks'
 import { selectUpcomingMatches } from 'modules/matches/selectors'
-import { getAttachmentUrl } from 'utils/attachments'
 import TournamentStandings from 'modules/standings/components/bar_graph'
 import MatchList from 'modules/matches/components/list'
 
@@ -47,9 +45,8 @@ const TournamentDashboard = () => {
   const allMatches = useTournamentMatches()
   const games = useTournamentGames()
   const matches = useSelector(state => selectUpcomingMatches(state))
-  const orderedMatches = orderBy(allMatches, ['endTime'], ['desc'])
 
-  if (isEmpty(matches) || isEmpty(games)) {
+  if (isEmpty(allMatches) || isEmpty(games)) {
     return null
   }
 
